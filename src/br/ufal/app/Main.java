@@ -25,7 +25,7 @@ public class Main {
 		try {
 			// Before running the program, set the path of your '.aff' file.
 			
-			 reader = new BufferedReader(new FileReader("/home/paulo/weka-3-6-13/data/zoo.arff"));
+			 reader = new BufferedReader(new FileReader("/home/danilo/weka-3-6-13/data/zoo.arff"));
 			 Instances data = new Instances(reader);
 			 reader.close();
 			 // setting class attribute
@@ -35,6 +35,12 @@ public class Main {
 			 Classifier classificadorKnn = knn.getNewClassifier();
 			 
 			 Instance animal = new Instance(18); // New instance for a Camel.
+
+			 
+//			 Instance animalTrain = new Instance(18); // New instance for a Camel.
+//			 
+//			 Instance animalTest = new Instance(18); // New instance for a Camel.
+
 			 
 			 
 			 
