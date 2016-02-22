@@ -2,7 +2,7 @@
  * 
  */
 /**
- * @author danilo
+ * @author danilo and João Paulo
  *
  */
 package br.ufal.algorthims;
