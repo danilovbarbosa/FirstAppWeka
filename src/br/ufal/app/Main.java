@@ -7,14 +7,18 @@
  */
 package br.ufal.app;
 
-import br.ufal.algorthims.Knn;
+import br.ufal.algorithms.AlgorithmKnn;
+import br.ufal.algorithms.AlgorithmTreeDecision;
 
 
 public class Main {
 
 	public static void main(String[] args) {
-		Knn instanceKnn = new Knn(5);
-		instanceKnn.runKNN("./datasets/zoo.arff");
+		AlgorithmKnn instanceKnn = new AlgorithmKnn(5);
+		instanceKnn.run("./datasets/zoo.arff");
+		
+		AlgorithmTreeDecision instanceTreeDecision = new AlgorithmTreeDecision();
+		instanceTreeDecision.run("./datasets/zoo.arff");
 
 		
 		

@@ -1,4 +1,4 @@
-package br.ufal.algorthims;
+package br.ufal.algorithms;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -9,18 +9,18 @@ import weka.classifiers.lazy.IBk;
 import weka.core.Instances;
 import weka.core.converters.ConverterUtils.DataSource;
 
-public class Knn {
+public class AlgorithmKnn implements InterfaceAlgorithm{
 	
 	private int neighbors;
 	
-	public Knn(int neighbors) {
+	public AlgorithmKnn(int neighbors) {
 		this.neighbors = neighbors;
 	}
 
-	public void runKNN(String dataset) {
+	@Override
+	public void run(String dataset) {
 
 		try {
-			// Before running the program, set the path of your '.aff' file.
 
 			// DataSource source = new DataSource("./datasets/zoo.arff");
 			DataSource source = new DataSource(dataset);
