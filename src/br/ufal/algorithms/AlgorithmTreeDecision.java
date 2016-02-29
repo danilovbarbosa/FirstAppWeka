@@ -32,11 +32,11 @@ public class AlgorithmTreeDecision implements InterfaceAlgorithm {
 
 			Instances treinametoInstances = data.trainCV(4, 2);
 
-			System.out.println("Treinamento: " + treinametoInstances.numInstances());
+			
 
 			Instances testeInstances = data.testCV(4, 2);
 
-			System.out.println("Treinamento teste: " + testeInstances.numInstances());
+			
 
 			Remove rm = new Remove();
 			rm.setAttributeIndices("1"); // remove 1st attribute
@@ -49,16 +49,22 @@ public class AlgorithmTreeDecision implements InterfaceAlgorithm {
 			fc.setClassifier(j48);
 			// train and make predictions
 			fc.buildClassifier(treinametoInstances);
+			
+
+			Evaluation eval = new Evaluation(data);
+			eval.evaluateModel(fc, testeInstances);
+			System.out.println(eval.toSummaryString("\nResultados Árvore de Decisão:\n======\n", false));
+			
+			System.out.println("Treinamento: " + treinametoInstances.numInstances());
+			
+			System.out.println("Treinamento teste: " + testeInstances.numInstances());
+			
 			for (int i = 0; i < testeInstances.numInstances(); i++) {
 				double pred = fc.classifyInstance(testeInstances.instance(i));
 				System.out.print("ID: " + testeInstances.instance(i).value(0));
 				System.out.print(", actual: " + testeInstances.classAttribute().value((int) testeInstances.instance(i).classValue()));
 				System.out.println(", predicted: " + testeInstances.classAttribute().value((int) pred));
 			}
-
-//			Evaluation eval = new Evaluation(data);
-//			eval.evaluateModel(classificadorKnn, testeInstances);
-//			System.out.println(eval.toSummaryString("\nResults\n======\n", false));
 
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
