@@ -3,7 +3,6 @@ package br.ufal.algorithms;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
 import weka.core.Instances;
 import weka.core.converters.ConverterUtils.DataSource;

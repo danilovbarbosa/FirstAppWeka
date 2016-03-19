@@ -26,7 +26,7 @@ public class AlgorithmMultilayerPerceptron implements InterfaceAlgorithm {
 			mlp.setLearningRate(0.3);
 			mlp.setMomentum(0.2);
 			mlp.setTrainingTime(2000);
-			mlp.setHiddenLayers("3");
+			mlp.setHiddenLayers("6");
 			
 			Instances treinametoInstances = data.trainCV(4, 2);
 
