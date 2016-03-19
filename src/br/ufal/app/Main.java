@@ -8,6 +8,7 @@
 package br.ufal.app;
 
 import br.ufal.algorithms.AlgorithmKnn;
+import br.ufal.algorithms.AlgorithmMultilayerPerceptron;
 import br.ufal.algorithms.AlgorithmTreeDecision;
 
 
@@ -19,6 +20,9 @@ public class Main {
 		
 		AlgorithmTreeDecision instanceTreeDecision = new AlgorithmTreeDecision();
 		instanceTreeDecision.run("./datasets/zoo.arff");
+		
+		AlgorithmMultilayerPerceptron instanceMLP = new AlgorithmMultilayerPerceptron();
+		instanceMLP.run("./datasets/zoo.arff");
 
 		
 		
