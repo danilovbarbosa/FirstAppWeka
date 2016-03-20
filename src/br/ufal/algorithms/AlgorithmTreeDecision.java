@@ -1,5 +1,6 @@
 package br.ufal.algorithms;
 
+import java.awt.BorderLayout;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -9,6 +10,8 @@ import weka.core.converters.ConverterUtils.DataSource;
 import weka.classifiers.meta.FilteredClassifier;
 import weka.classifiers.trees.J48;
 import weka.filters.unsupervised.attribute.Remove;
+import weka.gui.treevisualizer.PlaceNode2;
+import weka.gui.treevisualizer.TreeVisualizer;
 
 public class AlgorithmTreeDecision implements InterfaceAlgorithm {
 
@@ -47,23 +50,37 @@ public class AlgorithmTreeDecision implements InterfaceAlgorithm {
 			fc.setFilter(rm);
 			fc.setClassifier(j48);
 			// train and make predictions
-			fc.buildClassifier(treinametoInstances);
+			fc.buildClassifier(treinametoInstances);			
 			
 
 			Evaluation eval = new Evaluation(data);
 			eval.evaluateModel(fc, testeInstances);
 			System.out.println(eval.toSummaryString("\nResultados Árvore de Decisão:\n======\n", false));
 			
-			System.out.println("Treinamento: " + treinametoInstances.numInstances());
+			final javax.swing.JFrame jf = 
+				       new javax.swing.JFrame("Weka Classifier Tree Visualizer: J48");
+				     jf.setSize(500,400);
+				     jf.getContentPane().setLayout(new BorderLayout());
+				     TreeVisualizer tv = new TreeVisualizer(null,
+				         j48.graph(),
+				         new PlaceNode2());
+				     jf.getContentPane().add(tv, BorderLayout.CENTER);
+				     jf.addWindowListener(new java.awt.event.WindowAdapter() {
+				       public void windowClosing(java.awt.event.WindowEvent e) {
+				         jf.dispose();
+				       }
+				     });
+				 
+				     jf.setVisible(true);
+				     tv.fitToScreen();
+				     
+			System.out.println(j48);
+
 			
-			System.out.println("Treinamento teste: " + testeInstances.numInstances());
+			System.out.println("Instâncias de treinamento: " + treinametoInstances.numInstances());
 			
-			for (int i = 0; i < testeInstances.numInstances(); i++) {
-				double pred = fc.classifyInstance(testeInstances.instance(i));
-				System.out.print("ID: " + testeInstances.instance(i).value(0));
-				System.out.print(", actual: " + testeInstances.classAttribute().value((int) testeInstances.instance(i).classValue()));
-				System.out.println(", predicted: " + testeInstances.classAttribute().value((int) pred));
-			}
+			System.out.println("Instâncias de teste: " + testeInstances.numInstances());
+			
 
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block

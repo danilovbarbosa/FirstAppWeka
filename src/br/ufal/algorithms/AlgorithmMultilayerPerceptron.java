@@ -40,8 +40,8 @@ public class AlgorithmMultilayerPerceptron implements InterfaceAlgorithm {
 			
 			System.out.println(eval.toSummaryString("\nResultados MLP:\n======\n", false));
 			
-			System.out.println("Treinamento: " + treinametoInstances.numInstances());
-			System.out.println("Treinamento teste: " + testeInstances.numInstances());
+			System.out.println("Instâncias de treinamento: " + treinametoInstances.numInstances());
+			System.out.println("Instâncias de teste: " + testeInstances.numInstances());
 			
 			
 		} catch (Exception e) {

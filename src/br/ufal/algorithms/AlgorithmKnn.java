@@ -50,8 +50,8 @@ public class AlgorithmKnn implements InterfaceAlgorithm{
 			eval.evaluateModel(classificadorKnn, testeInstances);
 			System.out.println(eval.toSummaryString("\nResultados KNN:\n======\n", false));
 			
-			System.out.println("Treinamento: " + treinametoInstances.numInstances());
-			System.out.println("Treinamento teste: " + testeInstances.numInstances());
+			System.out.println("Instâncias de treinamento: " + treinametoInstances.numInstances());
+			System.out.println("Instâncias de teste: " + testeInstances.numInstances());
 
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
