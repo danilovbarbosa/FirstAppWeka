@@ -1,5 +1,7 @@
 package br.ufal.algorithms;
 
+import java.util.Random;
+
 import weka.classifiers.Evaluation;
 import weka.classifiers.functions.MultilayerPerceptron;
 import weka.core.Instances;
@@ -25,8 +27,10 @@ public class AlgorithmMultilayerPerceptron implements InterfaceAlgorithm {
 			
 			mlp.setLearningRate(0.3);
 			mlp.setMomentum(0.2);
-			mlp.setTrainingTime(2000);
-			mlp.setHiddenLayers("6");
+			mlp.setTrainingTime(500);
+			mlp.setHiddenLayers("a, a");
+			
+			data.resample(new Random(1));
 			
 			Instances treinametoInstances = data.trainCV(4, 2);
 
@@ -36,8 +40,8 @@ public class AlgorithmMultilayerPerceptron implements InterfaceAlgorithm {
 			
 			Evaluation eval = new Evaluation(data);
 			
-			eval.evaluateModel(mlp, testeInstances);
-			
+			//eval.evaluateModel(mlp, testeInstances);
+			eval.crossValidateModel(mlp, data, 10, new Random(0));
 			System.out.println(eval.toSummaryString("\nResultados MLP:\n======\n", false));
 			
 			System.out.println("Instâncias de treinamento: " + treinametoInstances.numInstances());
