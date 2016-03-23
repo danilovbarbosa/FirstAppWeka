@@ -3,13 +3,13 @@ package br.ufal.algorithms;
 import java.awt.BorderLayout;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Random;
 
 import weka.classifiers.Evaluation;
 import weka.core.Instances;
 import weka.core.converters.ConverterUtils.DataSource;
 import weka.classifiers.meta.FilteredClassifier;
 import weka.classifiers.trees.J48;
-import weka.filters.unsupervised.attribute.Remove;
 import weka.gui.treevisualizer.PlaceNode2;
 import weka.gui.treevisualizer.TreeVisualizer;
 
@@ -40,14 +40,14 @@ public class AlgorithmTreeDecision implements InterfaceAlgorithm {
 
 			
 
-			Remove rm = new Remove();
-			rm.setAttributeIndices("1"); // remove 1st attribute
+			//Remove rm = new Remove();
+			//rm.setAttributeIndices("1"); // remove 1st attribute
 			// classifier
 			J48 j48 = new J48();
 			j48.setUnpruned(true); // using an unpruned J48
 			// meta-classifier
 			FilteredClassifier fc = new FilteredClassifier();
-			fc.setFilter(rm);
+			//fc.setFilter(rm);
 			fc.setClassifier(j48);
 			// train and make predictions
 			fc.buildClassifier(treinametoInstances);			
@@ -55,11 +55,13 @@ public class AlgorithmTreeDecision implements InterfaceAlgorithm {
 
 			Evaluation eval = new Evaluation(data);
 			eval.evaluateModel(fc, testeInstances);
+			
+			//eval.crossValidateModel(fc, data, 10, new Random(0));
 			System.out.println(eval.toSummaryString("\nResultados Árvore de Decisão:\n======\n", false));
 			
 			final javax.swing.JFrame jf = 
 				       new javax.swing.JFrame("Weka Classifier Tree Visualizer: J48");
-				     jf.setSize(500,400);
+				     jf.setSize(800,600);
 				     jf.getContentPane().setLayout(new BorderLayout());
 				     TreeVisualizer tv = new TreeVisualizer(null,
 				         j48.graph(),

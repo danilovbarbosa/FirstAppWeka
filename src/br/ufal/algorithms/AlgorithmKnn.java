@@ -2,6 +2,7 @@ package br.ufal.algorithms;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Random;
 
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
@@ -48,6 +49,7 @@ public class AlgorithmKnn implements InterfaceAlgorithm{
 
 			Evaluation eval = new Evaluation(data);
 			eval.evaluateModel(classificadorKnn, testeInstances);
+			//eval.crossValidateModel(classificadorKnn, data, 10, new Random(0));
 			System.out.println(eval.toSummaryString("\nResultados KNN:\n======\n", false));
 			
 			System.out.println("Instâncias de treinamento: " + treinametoInstances.numInstances());

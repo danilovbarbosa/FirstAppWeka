@@ -28,7 +28,7 @@ public class AlgorithmMultilayerPerceptron implements InterfaceAlgorithm {
 			mlp.setLearningRate(0.3);
 			mlp.setMomentum(0.2);
 			mlp.setTrainingTime(500);
-			mlp.setHiddenLayers("a, a");
+			mlp.setHiddenLayers("6");
 			
 			data.resample(new Random(1));
 			
@@ -40,8 +40,8 @@ public class AlgorithmMultilayerPerceptron implements InterfaceAlgorithm {
 			
 			Evaluation eval = new Evaluation(data);
 			
-			//eval.evaluateModel(mlp, testeInstances);
-			eval.crossValidateModel(mlp, data, 10, new Random(0));
+			eval.evaluateModel(mlp, testeInstances);
+			//eval.crossValidateModel(mlp, data, 10, new Random(0));
 			System.out.println(eval.toSummaryString("\nResultados MLP:\n======\n", false));
 			
 			System.out.println("Instâncias de treinamento: " + treinametoInstances.numInstances());
