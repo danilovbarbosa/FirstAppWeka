@@ -27,13 +27,13 @@ public class AlgorithmMultilayerPerceptron implements InterfaceAlgorithm {
 			
 			mlp.setLearningRate(0.3);
 			mlp.setMomentum(0.2);
-<<<<<<< HEAD
-			mlp.setTrainingTime(2000);
-			mlp.setHiddenLayers("7");
-=======
-			mlp.setTrainingTime(500);
-			mlp.setHiddenLayers("6");
->>>>>>> fe8cda2dcd5ee43d8b765d6c4d906ed8c0ecebf1
+//<<<<<<< HEAD
+//			mlp.setTrainingTime(2000);
+//			mlp.setHiddenLayers("7");
+//=======
+//			mlp.setTrainingTime(500);
+//			mlp.setHiddenLayers("6");
+//>>>>>>> fe8cda2dcd5ee43d8b765d6c4d906ed8c0ecebf1
 			
 			data.resample(new Random(1));
 			
