@@ -1,7 +1,6 @@
 package br.ufal.util;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class Point {
@@ -15,8 +14,6 @@ public class Point {
 		super();
 		this.x = x;
 		this.y = y;
-    	this.random = new Random();
-
 	}
 
 	public double getX() {
@@ -49,7 +46,9 @@ public class Point {
     }
     
     //Random Points
-    private Point randomPoints(int min, int max) {
+    public Point randomPoints(int min, int max) {
+    	this.random = new Random();
+
     	//Recebe valores de mínimo é máximo, então realiza o caluclo e retorna um novo ponto random.
     	double x = min + (max - min) * this.random.nextDouble();
     	double y = min + (max - min) * this.random.nextDouble();
@@ -57,9 +56,9 @@ public class Point {
 		
 	}
     
-    protected List<Point> createRandomPoints(int min, int max, int tamanhoLista) {
+    public ArrayList<Point> createRandomPoints(int min, int max, int tamanhoLista) {
     	
-    	List<Point> points = new ArrayList<Point>(tamanhoLista);
+    	ArrayList<Point> points = new ArrayList<Point>(tamanhoLista);
     	for(int i = 0; i <= tamanhoLista; i++) {
     		points.add(this.randomPoints(min,max));
     	}
