@@ -5,17 +5,38 @@ import java.util.Random;
 
 public class Ponto {
 		
-	private double coordenadaX = 0.0;
-	private double coordenadaY = 0.0;
+	private ArrayList<Coordenada> coordenadas; 
 	private int clusterPertencente;
 	
-	public Ponto(double coordenadaX, double coordenadaY) {
-		super();
-		this.coordenadaX = coordenadaX;
-		this.coordenadaY = coordenadaY;
-	}
+	private double coordenadaX;
+	private double coordenadaY;
 
+	public Ponto(double x, double y) {
+		// TODO Auto-generated constructor stub
+	}
 	
+	
+//	public Ponto(ArrayList<String> coordenadas) {
+//		//Se verdadeiro então coordenada é tipo boolean, se não, então tipo int
+//		super();
+//		int aux;
+//
+//		for (int i = 0; i <= coordenadas.size(); i++){
+//			if (coordenadas.get(i).equals("true")){
+//				aux = 1;
+//				this.coordenadas.add(new Coordenada(true, aux));
+//			} else if(coordenadas.get(i).equals("false")){
+//				aux = 0;
+//				this.coordenadas.add(new Coordenada(true, aux));
+//		
+//			} else{
+//				this.coordenadas.add(new Coordenada(false, Integer.getInteger(coordenadas.get(i))));
+//			}
+//
+//		}
+//
+//	}
+
 
 	public double getCoordenadaX() {
 		return coordenadaX;
@@ -27,34 +48,57 @@ public class Ponto {
 	}
 
 
-
 	public double getCoordenadaY() {
 		return coordenadaY;
 	}
-
 
 
 	public void setCoordenadaY(double coordenadaY) {
 		this.coordenadaY = coordenadaY;
 	}
 
-	
+
+	public ArrayList<Coordenada> getCoordenadas() {
+		return coordenadas;
+	}
+
+	public void setCoordenadas(ArrayList<Coordenada> coordenadas) {
+		this.coordenadas = coordenadas;
+	}
 
 	public int getClusterPertencente() {
 		return clusterPertencente;
 	}
 
-
-
 	public void setClusterPertencente(int clusterPertencente) {
 		this.clusterPertencente = clusterPertencente;
 	}
 
-
-
 	//Calculo da distância euclidiana entre dois pontos.
     public static double calcularDistanciaEuclidiana(Ponto p, Ponto centroid) {
         return Math.sqrt(Math.pow((centroid.getCoordenadaX() - p.getCoordenadaY()), 2) + Math.pow((centroid.getCoordenadaX() - p.getCoordenadaY()), 2));
+    }
+
+    
+    public static double calcularDistanciaEuclidianaCoordenadas(Ponto p, Ponto centroid) {
+        
+    	double subtracaoA = 0;
+    	double subtracaoB = 0;
+    	for (int i = 0; i < p.getCoordenadas().size(); i++){
+    		
+    		subtracaoA = subtracaoA + centroid.getCoordenadas().get(i).getCoordenada() - p.getCoordenadas().get(i).getCoordenada();
+    		
+    	}
+    	
+    	for (int j = 0; j < p.getCoordenadas().size(); j++){
+    		
+    		
+    		subtracaoB = subtracaoB + centroid.getCoordenadas().get(j).getCoordenada() - p.getCoordenadas().get(j).getCoordenada();
+    	}
+    	
+        return Math.sqrt(Math.pow((subtracaoA), 2) + Math.pow((subtracaoB), 2));
+
+    	
     }
     
     //Random Points
@@ -78,12 +122,12 @@ public class Ponto {
     }
 
 
-
 	@Override
 	public String toString() {
-		return "Ponto (coordenadaX=" + coordenadaX + ", coordenadaY=" + coordenadaY + ")";
+		return "Ponto [coordenadas=" + coordenadas + ", clusterPertencente=" + clusterPertencente + "]";
 	}
-    
+
+
     
     
     
