@@ -1,38 +1,36 @@
 package br.ufal.util;
 
 public class Coordenada {
-	
-	private boolean tipoBooleanOuInt;
+
 	private int coordenada;
-	public Coordenada(boolean tipoBooleanOuInt, int coordenada) {
-		//Se verdadeiro então coordenada é tipo boolean, se não, então tipo int
+	
+	public Coordenada(boolean coordenada) {
 		super();
-		this.tipoBooleanOuInt = tipoBooleanOuInt;
-		this.coordenada = coordenada;
+		if (coordenada){
+			this.coordenada = 1;
+		}else{
+			this.coordenada = 0;
+		}
 	}
 	
-	public boolean isTipoBooleanOuInt() {
-		return tipoBooleanOuInt;
+	public Coordenada(int coordenada) {
+		super();
+		this.coordenada = coordenada;
 	}
 
 	public int getCoordenada() {
 		return coordenada;
 	}
-	
-	//Calculo da distância booleana entre dois pontos.
-	public int calcularDistanciaBoolean (Coordenada coordenadaCentroid){
-		if (this.coordenada == coordenadaCentroid.getCoordenada()){
-			return 0;
-		} else {
-			return 1;
-		}
-		
+
+	public void setCoordenada(int coordenada) {
+		this.coordenada = coordenada;
+	}
+
+	@Override
+	public String toString() {
+		return this.coordenada + "";
 	}
 	
-	//Calculo da distância euclidiana entre dois pontos.
-    public static double calcularDistanciaEuclidiana(Ponto p, Ponto centroid) {
-        return Math.sqrt(Math.pow((centroid.getCoordenadaX() - p.getCoordenadaY()), 2) + Math.pow((centroid.getCoordenadaX() - p.getCoordenadaY()), 2));
-    }
-
-
+	
+	
 }

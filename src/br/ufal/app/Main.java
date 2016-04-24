@@ -26,11 +26,11 @@ public class Main {
 //		AlgorithmMultilayerPerceptron instanceMLP = new AlgorithmMultilayerPerceptron();
 //		instanceMLP.run("./datasets/zoo.arff");
 
-		//AlgorithmKMeans kMeans = new AlgorithmKMeans(2, 15, 2, 20);
-		//kMeans.run(null);;
+		AlgorithmKMeans kMeans = new AlgorithmKMeans(7);
+		kMeans.run("/home/danilo/workspace/FirstAppWeka/datasets/zoo.csv");
 		
-		AlgorithmKMeansWeka kmw = new AlgorithmKMeansWeka(7);
-		kmw.run("./datasets/zoo.arff");
+//		AlgorithmKMeansWeka kmw = new AlgorithmKMeansWeka(7);
+//		kmw.run("./datasets/zoo.arff");
 		
 	}
 
