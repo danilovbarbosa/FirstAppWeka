@@ -36,7 +36,7 @@ public class AlgorithmKMeans implements InterfaceAlgorithm {
 			for (CSVRecord record : CSVFormat.DEFAULT.parse(in)) {
 				auxP = new Ponto();
 				for (String field : record) {
-//					System.out.print(" " + field + ",");
+					//System.out.print(" " + field + ",");
 					if (field.equals("true")){
 						auxP.addCoordenada(new Coordenada(true));
 					}else if(field.equals("false")){
@@ -45,7 +45,7 @@ public class AlgorithmKMeans implements InterfaceAlgorithm {
 						auxP.addCoordenada(new Coordenada(Integer.parseInt(field)));
 					}
 				}
-//				System.out.println(auxP);
+			//System.out.println(auxP);
 				this.auxPontos.add(auxP);
 			}
 		} catch (IOException e) {

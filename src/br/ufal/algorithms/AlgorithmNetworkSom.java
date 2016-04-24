@@ -14,13 +14,14 @@ public class AlgorithmNetworkSom implements InterfaceAlgorithm {
 			Instances data = source.getDataSet();
 
 			SelfOrganizingMap som = new SelfOrganizingMap();
+			
 
 			som.setConvergenceEpochs(1000);
 
 			som.setLearningRate(0.3);
 			som.setOrderingEpochs(50);
 
-			som.setWidth(2);
+			som.setWidth(4);
 			som.setCalcStats(true);
 			som.buildClusterer(data);
 			

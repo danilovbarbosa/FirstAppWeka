@@ -32,8 +32,8 @@ public class Main {
 //		AlgorithmMultilayerPerceptron instanceMLP = new AlgorithmMultilayerPerceptron();
 //		instanceMLP.run(datasetARFF);
 
-//		AlgorithmKMeans instanceKkMeans = new AlgorithmKMeans(7);
-//		instanceKkMeans.run(datasetCSV);
+		AlgorithmKMeans instanceKkMeans = new AlgorithmKMeans(7);
+		instanceKkMeans.run(datasetCSV);
 		
 //		AlgorithmKMeansWeka kmw = new AlgorithmKMeansWeka(7);
 //		kmw.run(datasetARFF);
@@ -41,8 +41,8 @@ public class Main {
 //		AlgorithmHierarchicalClusterer instancehC = new AlgorithmHierarchicalClusterer(7);
 //		instancehC.run(datasetARFF);
 		
-		AlgorithmNetworkSom som = new AlgorithmNetworkSom();
-		som.run(datasetARFF);
+//		AlgorithmNetworkSom som = new AlgorithmNetworkSom();
+//		som.run(datasetARFF);
 		
 	}
 

@@ -2,8 +2,8 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="bibliotecas/commons-csv-1.2.jar"/>
+	<classpathentry kind="lib" path="bibliotecas/SelfOrganizingMap.jar"/>
 	<classpathentry kind="lib" path="bibliotecas/weka.jar"/>
-	<classpathentry kind="lib" path="/home/danilo/workspace/FirstAppWeka/bibliotecas/commons-csv-1.2.jar"/>
-	<classpathentry kind="lib" path="/home/danilo/workspace/FirstAppWeka/bibliotecas/SelfOrganizingMap.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
