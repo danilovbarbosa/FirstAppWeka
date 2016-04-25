@@ -2,7 +2,11 @@ package br.ufal.algorithms;
 
 import weka.clusterers.ClusterEvaluation;
 import weka.clusterers.SimpleKMeans;
+import weka.core.ChebyshevDistance;
+import weka.core.EuclideanDistance;
 import weka.core.Instances;
+import weka.core.ManhattanDistance;
+import weka.core.MinkowskiDistance;
 import weka.core.converters.ConverterUtils.DataSource;
 
 public class AlgorithmKMeansWeka {
@@ -27,24 +31,24 @@ public class AlgorithmKMeansWeka {
 			skm.setNumClusters(numCentroides);
 
 			skm.setPreserveInstancesOrder(true);
+			
+			EuclideanDistance df = new EuclideanDistance();
+//			ManhattanDistance df = new ManhattanDistance();
+//			ChebyshevDistance df = new ChebyshevDistance();
+//			MinkowskiDistance df = new MinkowskiDistance();
+			
+			
+			skm.setDistanceFunction(df);
 
 			skm.buildClusterer(data);
 
-			Instances centroides = skm.getClusterCentroids();
-
-			for (int i = 0; i < centroides.numInstances(); i++) {
-				System.out.println("Centroide " + i + 1 + ": " + centroides.instance(i));
-			}
-
-			// get cluster membership for each instance
-			for (int i = 0; i < data.numInstances(); i++) {
-				System.out.println(data.instance(i) + " cestá no cluster " + skm.clusterInstance(data.instance(i)) + 1);
-
-			}
 			
 			ClusterEvaluation evaluation = new ClusterEvaluation();
 	        evaluation.setClusterer(skm);
 	        evaluation.evaluateClusterer(data);
+	        
+	        System.out.println("Função de distância: " + skm.getDistanceFunction().getClass().getSimpleName());
+	        
 	        System.out.println(evaluation.clusterResultsToString());
 
 

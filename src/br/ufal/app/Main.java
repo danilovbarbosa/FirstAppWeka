@@ -48,15 +48,15 @@ public class Main {
 		// AlgorithmKMeans instanceKkMeans = new AlgorithmKMeans(7);
 		// instanceKkMeans.run(datasetCSV);
 
-//		 AlgorithmKMeansWeka kmw = new AlgorithmKMeansWeka(7);
-//		 kmw.run(datasetARFFCluster);
+		 AlgorithmKMeansWeka kmw = new AlgorithmKMeansWeka(7);
+		 kmw.run(datasetARFFCluster);
 
 //		 AlgorithmHierarchicalClusterer instancehC = new
 //		 AlgorithmHierarchicalClusterer(7);
 //		 instancehC.run(datasetARFFCluster);
 
-		 AlgorithmNetworkSom som = new AlgorithmNetworkSom();
-		 som.run(datasetARFFCluster);
+//		 AlgorithmNetworkSom som = new AlgorithmNetworkSom();
+//		 som.run(datasetARFFCluster);
 
 //		int total_points, total_values, K, max_iterations;
 //		boolean has_name;
@@ -97,7 +97,7 @@ public class Main {
 //				}
 //
 //			}
-//
+
 //		} catch (FileNotFoundException e) {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
