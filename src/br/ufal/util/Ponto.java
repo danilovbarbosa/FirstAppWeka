@@ -26,7 +26,12 @@ public class Ponto {
 		this.id_cluster = -1;
 	}
 	
-	
+	public Ponto(int id_point, String name) {
+		super();
+		this.id_point = id_point;
+		this.total_values = values.size();
+		this.id_cluster = -1;
+	}
 	public int getId_point() {
 		return id_point;
 	}

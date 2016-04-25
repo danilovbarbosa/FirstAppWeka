@@ -1,14 +1,7 @@
 package br.ufal.algorithms;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Random;
-
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVRecord;
 
 import br.ufal.util.Cluster;
 import br.ufal.util.Ponto;
@@ -61,6 +54,7 @@ public class AlgorithmKMeans {
 			return;
 		}
 		ArrayList<Integer> prohibited_indexes = new ArrayList<>();
+		prohibited_indexes.add(-1);
 		
 		// escolhe valores de K distintos para o centroid dos clusters
 		for(int i = 0; i < this.k; i++) {
@@ -68,7 +62,8 @@ public class AlgorithmKMeans {
 				Random random = new Random();
 				int index_point = random.nextInt(total_points);
 
-				if(prohibited_indexes.get(index_point).equals(prohibited_indexes.get(prohibited_indexes.size() - 1))){
+//				if(prohibited_indexes.get(index_point).equals(prohibited_indexes.get(prohibited_indexes.size() - 1))){
+				if(prohibited_indexes.get(index_point).intValue() == prohibited_indexes.get(prohibited_indexes.size() - 1).intValue()){
 					prohibited_indexes.add(index_point);
 					pontos.get(index_point).setId_cluster(i);
 					Cluster cluster =  new Cluster(i, pontos.get(index_point));
@@ -149,34 +144,6 @@ public class AlgorithmKMeans {
 
 		}
 		
-	}
-
-	public void lerDataset(String caminhoArquivo) throws FileNotFoundException {
-
-		// Ponto auxP;
-		// try {
-		// Reader in = new
-		// FileReader(caminhoArquivo);
-		// for (CSVRecord record : CSVFormat.DEFAULT.parse(in)) {
-		// auxP = new Ponto();
-		// for (String field : record) {
-		//// System.out.print(" " + field + ",");
-		// if (field.equals("true")){
-		// auxP.addCoordenada(new Coordenada(true));
-		// }else if(field.equals("false")){
-		// auxP.addCoordenada(new Coordenada(false));
-		// }else if(field.length() == 1){
-		// auxP.addCoordenada(new Coordenada(Integer.parseInt(field)));
-		// }
-		// }
-		//// System.out.println(auxP);
-		// this.auxPontos.add(auxP);
-		// }
-		// } catch (IOException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
-
 	}
 
 }
