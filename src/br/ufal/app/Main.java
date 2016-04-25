@@ -31,6 +31,7 @@ public class Main {
 	public static void main(String[] args) {
 		String datasetARFF = "./datasets/zoo.arff";
 		String datasetCSV = "./datasets/zoo.csv";
+		String testCSV = "./datasets/teste.csv";
 
 		// AlgorithmKnn instanceKnn = new AlgorithmKnn(5);
 		// instanceKnn.run(datasetARFF);
@@ -59,11 +60,11 @@ public class Main {
 		int total_points, total_values, K, max_iterations;
 		boolean has_name;
 
-		total_points = 101;
-		total_values = 17;
-		K = 7;
+		total_points = 7;
+		total_values = 2;
+		K = 2;
 		max_iterations = 100;
-		has_name = true;
+		has_name = false;
 
 		ArrayList<Ponto> points = new ArrayList<>();
 		String point_name;
@@ -71,7 +72,7 @@ public class Main {
 		ArrayList<Coordenada> values;
 		int cont = -1;
 		try {
-			Reader in = new FileReader(datasetCSV);
+			Reader in = new FileReader(testCSV);
 			for (CSVRecord record : CSVFormat.DEFAULT.parse(in)) {
 				cont++;
 				values = new ArrayList<>();

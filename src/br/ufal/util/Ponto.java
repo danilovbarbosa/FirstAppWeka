@@ -60,6 +60,12 @@ public class Ponto {
 	public String getName() {
 		return name;
 	}
+
+	@Override
+	public String toString() {
+		return "Ponto [id_point=" + id_point + ", id_cluster=" + id_cluster + ", total_values=" + total_values
+				+ ", values=" + values + ", name=" + name + "]";
+	}
 	
 
 }

@@ -62,10 +62,10 @@ public class AlgorithmKMeans {
 				Random random = new Random();
 				int index_point = random.nextInt(total_points);
 
-//				if(prohibited_indexes.get(index_point).equals(prohibited_indexes.get(prohibited_indexes.size() - 1))){
-				if(prohibited_indexes.get(index_point).intValue() == prohibited_indexes.get(prohibited_indexes.size() - 1).intValue()){
+				if (!prohibited_indexes.contains(new Integer(index_point))){
 					prohibited_indexes.add(index_point);
 					pontos.get(index_point).setId_cluster(i);
+					System.out.println(pontos.get(index_point).toString());
 					Cluster cluster =  new Cluster(i, pontos.get(index_point));
 					clusters.add(cluster);
 					break;

@@ -16,7 +16,7 @@ public class Cluster {
 		for(int i = 0; i < total_values; i++){
 			central_values.add(ponto.getCoordenada(i));
 		}
-		
+		System.out.println(ponto.getClass());
 		pontos.add(ponto);
 	}
 	
