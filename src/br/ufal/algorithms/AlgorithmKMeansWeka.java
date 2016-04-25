@@ -1,5 +1,6 @@
 package br.ufal.algorithms;
 
+import weka.clusterers.ClusterEvaluation;
 import weka.clusterers.SimpleKMeans;
 import weka.core.Instances;
 import weka.core.converters.ConverterUtils.DataSource;
@@ -40,6 +41,12 @@ public class AlgorithmKMeansWeka {
 				System.out.println(data.instance(i) + " cestá no cluster " + skm.clusterInstance(data.instance(i)) + 1);
 
 			}
+			
+			ClusterEvaluation evaluation = new ClusterEvaluation();
+	        evaluation.setClusterer(skm);
+	        evaluation.evaluateClusterer(data);
+	        System.out.println(evaluation.clusterResultsToString());
+
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

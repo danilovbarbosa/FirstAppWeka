@@ -55,6 +55,9 @@ public class Cluster {
 	public ArrayList<Ponto> getPontos() {
 		return pontos;
 	}
+	public int size() {
+		return this.pontos.size();
+	}
 
 
 }

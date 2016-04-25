@@ -120,7 +120,9 @@ public class AlgorithmKMeans {
 		for(int i = 0; i < this.k; i++) {
 			int total_points_cluster =  clusters.get(i).getTotalPontos();
 
-			System.out.println("Cluster " + clusters.get(i).getId_cluster() + 1);
+			System.out.print("Cluster " + clusters.get(i).getId_cluster() + 1);
+			System.out.println(" - Tamanho -  " + clusters.get(i).size());
+
 			for(int j = 0; j < total_points_cluster; j++) {
 				System.out.print("Ponto " + clusters.get(i).getPonto(j).getId_point() + 1);
 				

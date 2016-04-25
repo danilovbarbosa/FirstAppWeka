@@ -30,6 +30,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		String datasetARFF = "./datasets/zoo.arff";
+		String datasetARFFCluster = "./datasets/zooCluster.arff";
 		String datasetCSV = "./datasets/zoo.csv";
 		String testCSV = "./datasets/teste.csv";
 
@@ -47,71 +48,67 @@ public class Main {
 		// AlgorithmKMeans instanceKkMeans = new AlgorithmKMeans(7);
 		// instanceKkMeans.run(datasetCSV);
 
-		// AlgorithmKMeansWeka kmw = new AlgorithmKMeansWeka(7);
-		// kmw.run(datasetARFF);
+//		 AlgorithmKMeansWeka kmw = new AlgorithmKMeansWeka(7);
+//		 kmw.run(datasetARFFCluster);
 
 //		 AlgorithmHierarchicalClusterer instancehC = new
 //		 AlgorithmHierarchicalClusterer(7);
-//		 instancehC.run(datasetARFF);
+//		 instancehC.run(datasetARFFCluster);
 
-		// AlgorithmNetworkSom som = new AlgorithmNetworkSom();
-		// som.run(datasetARFF);
+		 AlgorithmNetworkSom som = new AlgorithmNetworkSom();
+		 som.run(datasetARFFCluster);
 
-		int total_points, total_values, K, max_iterations;
-		boolean has_name;
-
-		total_points = 101;
-		total_values = 15;
-		K = 7;
-		max_iterations = 100;
-		has_name = true;
-
-		ArrayList<Ponto> points = new ArrayList<>();
-		String point_name;
-
-		ArrayList<Coordenada> values;
-		int cont = -1;
-		try {
-			Reader in = new FileReader(datasetCSV);
-			for (CSVRecord record : CSVFormat.DEFAULT.parse(in)) {
-				cont++;
-				values = new ArrayList<>();
-
-				for (String field : record) {
-					if (field.equals("true")) {
-						values.add(new Coordenada(1.0));
-					} else if (field.equals("false")) {
-						values.add(new Coordenada(0.0));
-					} else if (field.length() == 1) {
-						values.add(new Coordenada(Integer.parseInt(field) + 0.0));
-					}
-				}
-				if (has_name) {
-					point_name = record.getRecordNumber() + "";
-					Ponto p = new Ponto(cont, values, point_name);
-					points.add(p);
-				} else {
-					Ponto p = new Ponto(cont, values);
-					points.add(p);
-				}
-
-			}
-
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-//		for (Ponto p1 : points) {
-//			System.out.println(p1);
+//		int total_points, total_values, K, max_iterations;
+//		boolean has_name;
+//
+//		total_points = 101;
+//		total_values = 15;
+//		K = 7;
+//		max_iterations = 100;
+//		has_name = true;
+//
+//		ArrayList<Ponto> points = new ArrayList<>();
+//		String point_name;
+//
+//		ArrayList<Coordenada> values;
+//		int cont = -1;
+//		try {
+//			Reader in = new FileReader(datasetCSV);
+//			for (CSVRecord record : CSVFormat.DEFAULT.parse(in)) {
+//				cont++;
+//				values = new ArrayList<>();
+//
+//				for (String field : record) {
+//					if (field.equals("true")) {
+//						values.add(new Coordenada(1.0));
+//					} else if (field.equals("false")) {
+//						values.add(new Coordenada(0.0));
+//					} else if (field.length() == 1) {
+//						values.add(new Coordenada(Integer.parseInt(field) + 0.0));
+//					}
+//				}
+//				if (has_name) {
+//					point_name = record.getRecordNumber() + "";
+//					Ponto p = new Ponto(cont, values, point_name);
+//					points.add(p);
+//				} else {
+//					Ponto p = new Ponto(cont, values);
+//					points.add(p);
+//				}
+//
+//			}
+//
+//		} catch (FileNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
 //		}
-
-		 AlgorithmKMeans kmeans = new AlgorithmKMeans(K, total_values,total_points, max_iterations);
-		 kmeans.run(points);
+//		
+//
+//		 AlgorithmKMeans kmeans = new AlgorithmKMeans(K, total_values,total_points, max_iterations);
+//		 kmeans.run(points);
 
 	}
 
