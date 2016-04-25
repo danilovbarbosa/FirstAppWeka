@@ -1,82 +1,57 @@
 package br.ufal.util;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Cluster {
-
-	private ArrayList<Ponto> cluster;
-	private Ponto centroid;
 	
-
-	public Cluster() {
+	private int id_cluster;
+	private ArrayList<Coordenada> central_values;
+	private ArrayList<Ponto> pontos;
+	
+	public Cluster(int id_cluster, Ponto ponto) {
 		super();
-		this.cluster = new ArrayList<Ponto>();
-//		this.centroid = centroid;
-	}
-
-	public ArrayList<Ponto> getCluster() {
-		return cluster;
-	}
-
-	public void addCluster(Ponto ponto) {
-		this.cluster.add(ponto);
-	}
-
-	public Ponto getCentroid() {
-		return centroid;
-	}
-
-	public void setCentroid(Ponto centroid) {
-		this.centroid = centroid;
-	}
-
-//	public Ponto randomCentroid() {
-//		Random gerador = new Random();
-//		int numero = gerador.nextInt(this.cluster.size());
-//
-//		this.centroid = this.cluster.get(numero);
-//		return this.centroid;
-//	}
-
-	public void distParaCentroid(ArrayList<Ponto> pontos) {
-		double dist;
-		for (Ponto ponto : pontos) {
-			dist = ponto.distanciaEuclidiana(centroid);
-			ponto.setDistanciaParaCentroid(dist);
-		}
-
-	}
-	public void calcPontoMedio() {
-		Ponto pontoMedio = new Ponto();
+		this.id_cluster = id_cluster;
+		int total_values = ponto.getTotal_values();
 		
-		ArrayList<Integer> auxListaCoord = new ArrayList<>();
-
-		for (int i = 0; i <= this.centroid.getCoordenadas().size(); i++) {
-			int media = 0;
-			for (Ponto ponto : cluster) {
-				media = media + ponto.getCoordenadas().get(i).getCoordenada();
-			}
-			System.out.println("teste: " + media/this.centroid.getCoordenadas().size());
-
-			auxListaCoord.add(media/this.centroid.getCoordenadas().size());
+		for(int i = 0; i < total_values; i++){
+			central_values.add(ponto.getCoordenada(i));
 		}
-//		System.out.println(auxListaCoord);
-
-		for (Integer integer : auxListaCoord) {
-			pontoMedio.addCoordenada(new Coordenada(integer.intValue()));
-		}
-		System.out.println("Anterior: " + this.centroid);
-		this.centroid = pontoMedio;
-		System.out.println("Atual: " + this.centroid);
-
-	}
-
-	@Override
-	public String toString() {
-		return "Cluster [cluster=" + cluster + ", centroid=" + centroid + "]";
+		
+		pontos.add(ponto);
 	}
 	
-	
+	public int getId_cluster() {
+		return id_cluster;
+	}
+	public void addPonto(Ponto ponto){
+		pontos.add(ponto);
+	}
+	public boolean removePonto(int index){
+		try{
+			this.pontos.remove(index);
+			return true;
+		}catch(Exception e){
+			System.err.println(e);
+		}
+		return false;
+	}
+	public double getCentralValue(int index){
+		return central_values.get(index).getCoordenada();
+	}
+
+	public void setCentralValue(int index, double coordenada){
+		central_values.get(index).setCoordenada(coordenada);
+	}
+	public Ponto getPonto(int index){
+		return this.pontos.get(index);
+	}
+	public int getTotalPontos(){
+		return this.pontos.size();
+	}
+
+	public ArrayList<Ponto> getPontos() {
+		return pontos;
+	}
+
 
 }

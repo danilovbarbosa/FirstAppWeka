@@ -11,97 +11,172 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 
 import br.ufal.util.Cluster;
-import br.ufal.util.Coordenada;
 import br.ufal.util.Ponto;
 
-public class AlgorithmKMeans implements InterfaceAlgorithm {
+public class AlgorithmKMeans {
 
-	private int k;
+	private int k; // number of clusters
+	private int total_values, total_points, max_iterations;
 	private ArrayList<Cluster> clusters;
-	private ArrayList<Ponto> auxPontos;
 
-	public AlgorithmKMeans(int k) {
+	public AlgorithmKMeans(int k, int total_values, int total_points, int max_iterations) {
 		super();
 		this.k = k;
-		this.clusters = new ArrayList<>();
-		this.auxPontos = new ArrayList<>();
-
+		this.total_values = total_values;
+		this.total_points = total_points;
+		this.max_iterations = max_iterations;
 	}
-	
-	@Override
-	public void run(String dataset){
-		Ponto auxP;
-		try {
-			Reader in = new FileReader(dataset);
-			for (CSVRecord record : CSVFormat.DEFAULT.parse(in)) {
-				auxP = new Ponto();
-				for (String field : record) {
-					//System.out.print(" " + field + ",");
-					if (field.equals("true")){
-						auxP.addCoordenada(new Coordenada(true));
-					}else if(field.equals("false")){
-						auxP.addCoordenada(new Coordenada(false));
-					}else if(field.length() == 1){
-						auxP.addCoordenada(new Coordenada(Integer.parseInt(field)));
+
+	// Função para verificar e retonar o centroid mais próximo;
+	private int getIDNearestCenter(Ponto ponto) {
+		double sum = 0.0;
+		double min_dist;
+		int id_cluster_center = 0;
+
+		for (int i = 0; i < this.total_values; i++) {
+			sum += Math.pow(clusters.get(0).getCentralValue(i) - ponto.getValue(i), 2.0);
+		}
+		min_dist = Math.sqrt(sum);
+
+		for (int i = 1; i < this.k; i++) {
+			double dist;
+			sum = 0.0;
+
+			for (int j = 0; j < total_values; j++) {
+				sum += Math.pow(clusters.get(i).getCentralValue(j) - ponto.getValue(j), 2.0);
+			}
+
+			dist = Math.sqrt(sum);
+
+			if (dist < min_dist) {
+				min_dist = dist;
+				id_cluster_center = i;
+			}
+		}
+		return id_cluster_center;
+	}
+
+	public void run(ArrayList<Ponto> pontos)  {
+		if (this.k > total_points){
+			return;
+		}
+		ArrayList<Integer> prohibited_indexes = new ArrayList<>();
+		
+		// escolhe valores de K distintos para o centroid dos clusters
+		for(int i = 0; i < this.k; i++) {
+			while(true) {
+				Random random = new Random();
+				int index_point = random.nextInt(total_points);
+
+				if(prohibited_indexes.get(index_point).equals(prohibited_indexes.get(prohibited_indexes.size() - 1))){
+					prohibited_indexes.add(index_point);
+					pontos.get(index_point).setId_cluster(i);
+					Cluster cluster =  new Cluster(i, pontos.get(index_point));
+					clusters.add(cluster);
+					break;
+				}
+			}
+		}
+		int iter = 1;
+		
+		while (true) {
+			boolean done = true;
+			
+			// associates each point to the nearest center
+			for(int i = 0; i < total_points; i++) {
+				int id_old_cluster = pontos.get(i).getId_cluster();
+				int id_nearest_center = getIDNearestCenter(pontos.get(i));
+
+				if(id_old_cluster != id_nearest_center) {
+					if(id_old_cluster != -1) {
+						clusters.get(id_old_cluster).removePonto(pontos.get(i).getId_point());
+					}
+					pontos.get(i).setId_cluster(id_nearest_center);
+					clusters.get(id_nearest_center).addPonto(pontos.get(i));
+					done = false;
+				}		
+			}
+			// recalculating the center of each cluster
+			for(int i = 0; i < this.k; i++) {
+				for(int j = 0; j < total_values; j++)
+				{
+					int total_points_cluster = clusters.get(i).getTotalPontos();
+					double sum = 0.0;
+
+					if(total_points_cluster > 0) {
+						for(int p = 0; p < total_points_cluster; p++) {
+							sum += clusters.get(i).getPonto(p).getValue(j);
+						}
+						clusters.get(i).setCentralValue(j, sum / total_points_cluster);
 					}
 				}
-			//System.out.println(auxP);
-				this.auxPontos.add(auxP);
 			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		
-		
-		for (int i = 0; i < this.k; i++) {
-			this.clusters.add(new Cluster());
-		}
-		centroidInicial();
-		
-		//Distancia para cada centroi
-		for (Ponto ponto : auxPontos) {
-			int auxI = 0;
-			double auxDist = 500.0;
-			double auxCalcDist = 0.0;
 			
-			for (int i = 0; i < clusters.size(); i++) {
-				auxCalcDist = ponto.distanciaEuclidiana(clusters.get(i).getCentroid());
-				if (auxDist > auxCalcDist){
-					auxDist = auxCalcDist;
-					ponto.setDistanciaParaCentroid(auxDist);
-					auxI = i;
-
-				}
-				if(i  == clusters.size() - 1){
-					clusters.get(auxI).addCluster(ponto);
-				}
+			if(done == true || iter >= max_iterations)
+			{
+				System.out.println("Fim do loop.");;
+				break;
 			}
+			iter++;
 		}
 		
-//		for (Cluster c : clusters) {
-//			System.out.println(c.getCluster().size());
-//
-//			c.calcPontoMedio();
-////			if (c.getCluster().size() >= 1){
-////			}
-//		}
-		
-		
-		System.out.println("FIM");
-	}
-	//Calculo dos centroids iniciais
-	public void centroidInicial() {
-		Random gerador = new Random();
-		int numero;
-		
-		for (int i = 0; i < this.k; i++) {
-			numero = gerador.nextInt(this.auxPontos.size());
-			this.clusters.get(i).setCentroid(auxPontos.get(numero));
+		// print elementos do cluster
+		for(int i = 0; i < this.k; i++) {
+			int total_points_cluster =  clusters.get(i).getTotalPontos();
+
+			System.out.println("Cluster " + clusters.get(i).getId_cluster() + 1);
+			for(int j = 0; j < total_points_cluster; j++) {
+				System.out.print("Ponto " + clusters.get(i).getPonto(j).getId_point() + 1);
+				
+				for(int p = 0; p < total_values; p++){
+					System.out.print(clusters.get(i).getPonto(j).getValue(p));
+				}
+				String point_name = clusters.get(i).getPonto(j).getName();
+
+				if(point_name != "") {
+					System.out.print(" - " + point_name);
+				}
+				System.out.println();
+			}
+
+			System.out.print("Cluster values: ");
+
+			for(int j = 0; j < total_values; j++){
+				System.out.print(clusters.get(i).getCentralValue(j));
+			}
+			System.out.println();
+			System.out.println();
+
 		}
-
+		
 	}
 
+	public void lerDataset(String caminhoArquivo) throws FileNotFoundException {
+
+		// Ponto auxP;
+		// try {
+		// Reader in = new
+		// FileReader(caminhoArquivo);
+		// for (CSVRecord record : CSVFormat.DEFAULT.parse(in)) {
+		// auxP = new Ponto();
+		// for (String field : record) {
+		//// System.out.print(" " + field + ",");
+		// if (field.equals("true")){
+		// auxP.addCoordenada(new Coordenada(true));
+		// }else if(field.equals("false")){
+		// auxP.addCoordenada(new Coordenada(false));
+		// }else if(field.length() == 1){
+		// auxP.addCoordenada(new Coordenada(Integer.parseInt(field)));
+		// }
+		// }
+		//// System.out.println(auxP);
+		// this.auxPontos.add(auxP);
+		// }
+		// } catch (IOException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
+
+	}
 
 }

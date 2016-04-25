@@ -4,57 +4,57 @@ import java.util.ArrayList;
 
 public class Ponto {
 	
-	private ArrayList<Coordenada> coordenadas;
-	private double distanciaParaCentroid;
-
-	public Ponto() {
+	
+	private int id_point, id_cluster, total_values;
+	ArrayList<Coordenada> values;
+	private String name;
+	
+	public Ponto(int id_point, ArrayList<Coordenada> values, String name) {
 		super();
-		this.coordenadas = new ArrayList<>();
-		this.distanciaParaCentroid = 0.0;
-	}
-
-	public double getDistanciaParaCentroid() {
-		return distanciaParaCentroid;
-	}
-
-	public void setDistanciaParaCentroid(double distanciaParaCentroid) {
-		this.distanciaParaCentroid = distanciaParaCentroid;
-	}
-
-	public void setCoordenadas(ArrayList<Coordenada> coordenadas) {
-		this.coordenadas = coordenadas;
-	}
-
-	public ArrayList<Coordenada> getCoordenadas() {
-		return coordenadas;
-	}
-
-	public void addCoordenada(Coordenada coordenada) {
-		this.coordenadas.add(coordenada);
+		this.id_point = id_point;
+		this.total_values = values.size();
+		this.values = values;
+		this.name = name;
+		this.id_cluster = -1;
 	}
 	
-	public double distanciaEuclidiana(Ponto pontoY) {
-		double soma = 0.0;
-				
-		for (Coordenada coordPontoX : coordenadas) {
-			for (Coordenada coordPontoY : pontoY.getCoordenadas()) {
-				soma = soma + Math.pow((coordPontoX.getCoordenada() - coordPontoY.getCoordenada()), 2);
-			}
-		}
-//		this.distanciaParaCentroid = Math.sqrt(soma);		
-		return Math.sqrt(soma);
+	public Ponto(int id_point, ArrayList<Coordenada> values) {
+		super();
+		this.id_point = id_point;
+		this.total_values = values.size();
+		this.values = values;
+		this.id_cluster = -1;
 	}
-
-	@Override
-	public String toString() {
-		return "Ponto [coordenadas=" + coordenadas + ", distanciaParaCentroid=" + distanciaParaCentroid + "]";
-	}
-
 	
 	
-//	public double distanciaManhattan() {
-//		double result;
-//		
-//		return result;
-//	}
+	public int getId_point() {
+		return id_point;
+	}
+
+	public int getId_cluster() {
+		return id_cluster;
+	}
+	public void setId_cluster(int id_cluster) {
+		this.id_cluster = id_cluster;
+	}
+	public int getTotal_values() {
+		return total_values;
+	}
+	public Coordenada getCoordenada(int index) {
+		return values.get(index);
+	}
+	public double getValue(int index) {
+		return values.get(index).getCoordenada();
+	}
+	public ArrayList<Coordenada> getValues() {
+		return values;
+	}
+	public void addValues(Coordenada coordenada) {
+		this.values.add(coordenada);
+	}
+	public String getName() {
+		return name;
+	}
+	
+
 }
