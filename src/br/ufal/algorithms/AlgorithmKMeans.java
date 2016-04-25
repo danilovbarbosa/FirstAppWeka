@@ -18,6 +18,7 @@ public class AlgorithmKMeans {
 		this.total_values = total_values;
 		this.total_points = total_points;
 		this.max_iterations = max_iterations;
+		this.clusters = new ArrayList<>();
 	}
 
 	// Função para verificar e retonar o centroid mais próximo;
@@ -26,7 +27,7 @@ public class AlgorithmKMeans {
 		double min_dist;
 		int id_cluster_center = 0;
 
-		for (int i = 0; i < this.total_values; i++) {
+		for (int i = 0; i <= this.total_values; i++) {
 			sum += Math.pow(clusters.get(0).getCentralValue(i) - ponto.getValue(i), 2.0);
 		}
 		min_dist = Math.sqrt(sum);

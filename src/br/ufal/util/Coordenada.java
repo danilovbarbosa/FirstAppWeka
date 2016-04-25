@@ -16,6 +16,11 @@ public class Coordenada {
 	public void setCoordenada(double coordenada) {
 		this.coordenada = coordenada;
 	}
+
+	@Override
+	public String toString() {
+		return "Coordenada [coordenada=" + coordenada + "]";
+	}
 	
 	
 

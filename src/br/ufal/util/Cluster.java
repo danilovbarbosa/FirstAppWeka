@@ -12,11 +12,14 @@ public class Cluster {
 		super();
 		this.id_cluster = id_cluster;
 		int total_values = ponto.getTotal_values();
+		this.pontos = new ArrayList<>();
+		this.central_values = new ArrayList<>();
 		
 		for(int i = 0; i < total_values; i++){
+			System.out.println(ponto.getCoordenada(i));
 			central_values.add(ponto.getCoordenada(i));
 		}
-		System.out.println(ponto.getClass());
+		
 		pontos.add(ponto);
 	}
 	

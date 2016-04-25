@@ -60,11 +60,11 @@ public class Main {
 		int total_points, total_values, K, max_iterations;
 		boolean has_name;
 
-		total_points = 7;
-		total_values = 2;
-		K = 2;
+		total_points = 101;
+		total_values = 15;
+		K = 7;
 		max_iterations = 100;
-		has_name = false;
+		has_name = true;
 
 		ArrayList<Ponto> points = new ArrayList<>();
 		String point_name;
@@ -72,7 +72,7 @@ public class Main {
 		ArrayList<Coordenada> values;
 		int cont = -1;
 		try {
-			Reader in = new FileReader(testCSV);
+			Reader in = new FileReader(datasetCSV);
 			for (CSVRecord record : CSVFormat.DEFAULT.parse(in)) {
 				cont++;
 				values = new ArrayList<>();
@@ -104,8 +104,13 @@ public class Main {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		
+//		for (Ponto p1 : points) {
+//			System.out.println(p1);
+//		}
 
-		 AlgorithmKMeans kmeans = new AlgorithmKMeans(K, total_points, total_values, max_iterations);
+		 AlgorithmKMeans kmeans = new AlgorithmKMeans(K, total_values,total_points, max_iterations);
 		 kmeans.run(points);
 
 	}
