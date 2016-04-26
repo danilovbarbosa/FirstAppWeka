@@ -12,15 +12,21 @@ public class AlgorithmNetworkSom implements InterfaceAlgorithm {
 		try {
 			DataSource source = new DataSource(dataset);
 			Instances data = source.getDataSet();
+			
+			data.deleteAttributeAt(0);
+			data.deleteAttributeAt(16);
 
 			SelfOrganizingMap som = new SelfOrganizingMap();
 			
 
 			som.setConvergenceEpochs(1000);
+			
+			
 
 			som.setLearningRate(0.3);
-			som.setOrderingEpochs(50);
+			som.setOrderingEpochs(500);
 
+			som.setHeight(2);
 			som.setWidth(4);
 			som.setCalcStats(true);
 			som.buildClusterer(data);

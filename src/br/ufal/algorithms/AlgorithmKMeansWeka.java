@@ -39,6 +39,8 @@ public class AlgorithmKMeansWeka {
 			
 			
 			skm.setDistanceFunction(df);
+			
+			
 
 			skm.buildClusterer(data);
 
