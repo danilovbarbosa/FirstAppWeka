@@ -8,6 +8,8 @@ import weka.core.Instances;
 import weka.core.ManhattanDistance;
 import weka.core.MinkowskiDistance;
 import weka.core.converters.ConverterUtils.DataSource;
+import weka.filters.Filter;
+import weka.filters.unsupervised.attribute.Remove;
 
 public class AlgorithmKMeansWeka {
 
@@ -25,12 +27,24 @@ public class AlgorithmKMeansWeka {
 
 			DataSource source = new DataSource(dataset);
 			Instances data = source.getDataSet();
+			
+			data.deleteAttributeAt(0);
+			
+			data.setClassIndex(data.numAttributes()-1);
+			
+			Remove filter = new Remove();
+		    filter.setAttributeIndices("" + (data.classIndex() + 1));
+		    filter.setInputFormat(data);
+		    Instances dataClusterer = Filter.useFilter(data, filter);
+			
 
 			SimpleKMeans skm = new SimpleKMeans();
 
 			skm.setNumClusters(numCentroides);
 
 			skm.setPreserveInstancesOrder(true);
+			
+			
 			
 			EuclideanDistance df = new EuclideanDistance();
 //			ManhattanDistance df = new ManhattanDistance();
@@ -42,11 +56,15 @@ public class AlgorithmKMeansWeka {
 			
 			
 
-			skm.buildClusterer(data);
+			
+			skm.buildClusterer(dataClusterer);
 
 			
 			ClusterEvaluation evaluation = new ClusterEvaluation();
 	        evaluation.setClusterer(skm);
+	        
+	        
+	        
 	        evaluation.evaluateClusterer(data);
 	        
 	        System.out.println("Função de distância: " + skm.getDistanceFunction().getClass().getSimpleName());

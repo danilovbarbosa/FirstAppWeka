@@ -48,15 +48,15 @@ public class Main {
 		// AlgorithmKMeans instanceKkMeans = new AlgorithmKMeans(7);
 		// instanceKkMeans.run(datasetCSV);
 
-//		 AlgorithmKMeansWeka kmw = new AlgorithmKMeansWeka(7);
-//		 kmw.run(datasetARFFCluster);
+		 AlgorithmKMeansWeka kmw = new AlgorithmKMeansWeka(7);
+		 kmw.run(datasetARFF);
 
 //		 AlgorithmHierarchicalClusterer instancehC = new
 //		 AlgorithmHierarchicalClusterer(7);
 //		 instancehC.run(datasetARFFCluster);
 
-		 AlgorithmNetworkSom som = new AlgorithmNetworkSom();
-		 som.run(datasetARFF);
+//		 AlgorithmNetworkSom som = new AlgorithmNetworkSom();
+//		 som.run(datasetARFF);
 
 //		int total_points, total_values, K, max_iterations;
 //		boolean has_name;
