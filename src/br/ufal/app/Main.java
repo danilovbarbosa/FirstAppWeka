@@ -48,8 +48,8 @@ public class Main {
 		// AlgorithmKMeans instanceKkMeans = new AlgorithmKMeans(7);
 		// instanceKkMeans.run(datasetCSV);
 
-		 AlgorithmKMeansWeka kmw = new AlgorithmKMeansWeka(7);
-		 kmw.run(datasetARFF);
+//		 AlgorithmKMeansWeka kmw = new AlgorithmKMeansWeka(7);
+//		 kmw.run(datasetARFF);
 
 //		 AlgorithmHierarchicalClusterer instancehC = new
 //		 AlgorithmHierarchicalClusterer(7);
@@ -109,6 +109,10 @@ public class Main {
 //
 //		 AlgorithmKMeans kmeans = new AlgorithmKMeans(K, total_values,total_points, max_iterations);
 //		 kmeans.run(points);
+		
+		AlgorithmNaiveBayes naiveBayes = new AlgorithmNaiveBayes();
+		naiveBayes.run(datasetARFF);
+		
 
 	}
 
