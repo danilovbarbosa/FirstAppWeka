@@ -1,2 +1,2 @@
 # FirstAppWeka
-First App Weka. Project to class from Learning Machine.
+Studying machine learning using Java and Weka. Several algorithms.
